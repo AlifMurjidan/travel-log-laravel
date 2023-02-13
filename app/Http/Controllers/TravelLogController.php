@@ -39,6 +39,15 @@ class TravelLogController extends Controller
     public function store(Request $request)
     {
         // logic untuk tambah data
+        // $travel_logs = new TravelLog;
+        // $travel_logs->date = $request->date;
+        // $travel_logs->time = $request->time;
+        // $travel_logs->location = $request->location;
+        // $travel_logs->temperature = $request->temperature;
+        // $travel_logs->save();
+
+        $travel_logs = TravelLog::create($request->all());
+        return redirect('/travel');
     }
 
     /**
@@ -50,17 +59,16 @@ class TravelLogController extends Controller
     public function show($id)
     {
         // untuk menampilkan single data / data tertentu
+        $travel_log = TravelLog::find($id);
+
+        return view('travel.show', compact('travel_log'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         // untuk menampilkan view form ubah data
+        $travel_log = TravelLog::find($id);
+        return view('travel.edit', compact('travel_log'));
     }
 
     /**
@@ -73,6 +81,14 @@ class TravelLogController extends Controller
     public function update(Request $request, $id)
     {
         // logic untuk ubah data
+        $travel_log = TravelLog::where('id', $id)->first()->update([
+            'date' => $request->date,
+            'time' => $request->time,
+            'location' => $request->location,
+            'temperature' => $request->temperature
+        ]);
+
+        return redirect()->route('travel.index');
     }
 
     /**
@@ -81,8 +97,10 @@ class TravelLogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         // logic untuk hapus data
+        $travel_logs = TravelLog::find($id)->delete();
+        return redirect('/travel');
     }
 }

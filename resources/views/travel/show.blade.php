@@ -16,20 +16,12 @@
         </div>
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                  @foreach ( $travel_logs as $travel_log )
-                  <a href="{{ route('travel.show', $travel_log->id)}}">
                     <p>Tanggal : <?= $travel_log->date ?></p>
                     <p>Waktu : <?= $travel_log->time ?></p>
-                    </a>
-                    <a href="{{ route('travel.edit', $travel_log->id) }}">Update</a>
-                    <form action="/travel/{{$travel_log->id}}" method="post">
-                        @method('delete')
-                        @csrf
-                        <button type="submit" style="color:red;">Delete</button>
-                    </form>
-                  @endforeach  
+                    <p>Lokasi : <?= $travel_log->location ?></p>
+                    <p>Suhu Tubuh : <?= $travel_log->temperature ?></p>
+                    <br>
                 </div>
-
             </div>
         </div>
     </div>

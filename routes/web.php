@@ -32,6 +32,17 @@ Route::middleware('auth')->group(function () {
     // Travel Logs Routes
     Route::get('/travel', [TravelLogController::class, 'index'])->name('travel.index');
     Route::get('/travel/create', [TravelLogController::class, 'create'])->name('travel.create');
+    Route::post('/travel/create', [TravelLogController::class, 'store'])->name('travel.store');
+    Route::get('/travel/{id}', [TravelLogController::class, 'show'])->name('travel.show');
+    Route::get('/travel/edit/{id}', [TravelLogController::class, 'edit'])->name('travel.edit');
+    Route::put('/travel/update/{id}', [TravelLogController::class, 'update'])->name('travel.update');
+    Route::delete('/travel/{id}', [TravelLogController::class, 'delete']);
+
+    // Route::resource('travel', TravelController::class);
+    // Route::resources([
+    
+    // ]);
+
 });
 
 require __DIR__.'/auth.php';
